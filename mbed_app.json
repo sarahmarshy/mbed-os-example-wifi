@@ -2,11 +2,11 @@
     "config": {
         "wifi-ssid": {
             "help": "WiFi SSID",
-            "value": "\"SSID\""
+            "value": "\"iotlab\""
         },
         "wifi-password": {
             "help": "WiFi Password",
-            "value": "\"PASSWORD\""
+            "value": "\"42F67YxLX4AawRdcj\""
         },
         "wifi-tx": {
             "help": "TX pin for serial connection to external device",
