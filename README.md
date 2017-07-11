@@ -1,37 +1,27 @@
-# mbed-os-example-wifi #
+# mxhip EMW3080 mbed-os-example-wifi #
 
-WiFi example for mbed OS
+WiFi example for mbed OS using mxchip EMW3080.
 
 ## Getting started with the WiFi API ##
 
 This is a quick example of a simple WiFi application using the WiFi and network-socket APIs that is provided as a part of [mbed-os](github.com/armmbed/mbed-os).
 
-The program brings up the WiFi and the underlying network interface, and uses it to scans available networks, connects to a network, prints interface and connection details and performs simple HTTP operation.
+The program brings up the WiFi and the underlying network interface, and uses it to connect to a network, prints interface and connection details and performs simple HTTP operation.
 
-### Supported hardware ###
+#### Connecting the EMW3080 to Nucleo F401RE ####
 
-* [UBLOX Odin board](https://developer.mbed.org/platforms/ublox-EVK-ODIN-W2/) built-in WiFi module
-* [REALTEK_RTL8195AM](https://developer.mbed.org/platforms/REALTEK-RTL8195AM/) built-in WiFi module
-* [NUCLEO_F429ZI](https://developer.mbed.org/platforms/ST-Nucleo-F429ZI/) with ESP8266-01 module using pins D1 D0
-* [NUCLEO_L476RG](https://developer.mbed.org/platforms/ST-Nucleo-L476RG/) with ESP8266-01 module using pins D8 D2
-* Other mbed target with ESP2866 module (Board it's connected to shouldn't have other network interface eg. Ethernet)
-
-ESP2866 is a fallback option and will be used if the build is for unsupported platform.
-
-#### Connecting the ESP2866 ####
-
-ESP module needs to be connected to RX and TX UART pins (+ power and ground) on your target board. That can be achieved using Grove shield or connected directly using jumper wires, please note that not all Arduino form factor boards have UART compatible with the Grove shiled.
-
-For Grove shield TX has to be connected to D1 and RX to D0.
-
-Make sure that UART module you're connecting ESP to is different than the debug UART connected to your USB port.
+By default, the shield will connect the TX/RX of the radio to D1/D0 on the Nuclo board. However, these serial lines are muxed with that for the USB serial connection, so stdio serial and D1/D0 cannot be used at the same time. You will instead connect the TX/RX of the shield to D2/D10. To accomplish this:
+* Bend the TX/RX pins of the shield outward, so that they do not make contact with the board
+* Place the shield on the board's arduino headers
+* Wire the TX pin on the EMW3080 to D10 on the Nucleo
+* Wire the RX pin on the EMW3080 to D2 on the Nucleo
 
 ##  Getting started
 
 1. Import the example
 
   ```
-  mbed import mbed-os-example-wifi
+  mbed import https://github.com/sarahmarshy/mbed-os-example-wifi
   cd mbed-os-example-wifi
   ```
 2. Configure the WiFi credentials
@@ -56,7 +46,7 @@ Make sure that UART module you're connecting ESP to is different than the debug 
   For example, for `GCC`:
 
   ```
-  mbed compile -t GCC_ARM -m UBLOX_EVK_ODIN_W2
+  mbed compile -t GCC_ARM -m NUCLEO_F401RE
   ```
 
 ## Documentation ##
